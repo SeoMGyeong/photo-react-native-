@@ -1,37 +1,77 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Tabs } from 'expo-router';
+//
+const TabLayout = () => {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
+    // name="/" 레이아웃 기준의... 루트? 루트경로.기본 탭 화면
+    // headerShown:false -> 헤더사라짐
+    <Tabs screenOptions={{ headerShown: false }}>
       <Tabs.Screen
-        name="index"
+        name="index" //name이름은 파일이름이랑 같아야됨
         options={{
           title: 'Home',
+          headerShown: true, //header 보여짐
+
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+            <TabBarIcon
+              name={focused ? 'home' : 'home-outline'}
+              color={color}
+            />
           ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="ListScreen"
         options={{
-          title: 'Explore',
+          title: 'List',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <MaterialCommunityIcons
+              name={focused ? 'home' : 'home-outline'}
+              color={color}
+              size={32}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="AddScreen"
+        options={{
+          title: 'Add',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={focused ? 'home' : 'home-outline'}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="MapScreen"
+        options={{
+          title: 'Map',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={focused ? 'home' : 'home-outline'}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="ProfileScreen"
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={focused ? 'home' : 'home-outline'}
+              color={color}
+            />
           ),
         }}
       />
     </Tabs>
   );
-}
+};
+
+export default TabLayout;
