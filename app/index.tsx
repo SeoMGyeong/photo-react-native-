@@ -1,15 +1,47 @@
-//홈화면, _layout.tsx 파일에 있는 페이지 명들 index에서 보여주고 싶으면 Link 태그 통해서 보여주기(link거는 용도인듯) 참고로 Link 컴퍼넌트는 expo-router로 해주기
+import Button from '@/components/Button';
+import Input, { InputTypes, ReturnKeyTypes } from '@/components/Input';
+import SafeInputView from '@/components/SafeInputView';
 import { Link } from 'expo-router';
+import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-const Index = () => {
+const SignInScreen = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
-    // link href는 _layout.tsx의 stack.screen name 적어주면 됨
-    <View style={styles.container}>
-      <Text>로그인화면</Text>
-      <Link href="SignUpScreen">회원가입</Link>
-      <Link href="(tabs)">탭화면</Link>
-    </View>
+    <SafeInputView>
+      <View style={styles.container}>
+        <Text>Sign In</Text>
+        <Input
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+          inputType={InputTypes.EMAIL}
+          returnKeyType={ReturnKeyTypes.NEXT}
+          styles={inputStyles}
+        />
+        <Input
+          value={password}
+          onChangeText={(text) => setPassword(text)}
+          inputType={InputTypes.PASSWORD}
+          returnKeyType={ReturnKeyTypes.DONE}
+          styles={inputStyles}
+        />
+
+        <Button
+          title="Sign In"
+          onPress={() => {}}
+          styles={{ button: { borderRadius: 8 } }}
+        />
+
+        <Link
+          href="SignUpScreen"
+          style={{ paddingHorizontal: 20, marginTop: 20 }}
+        >
+          회원가입
+        </Link>
+      </View>
+    </SafeInputView>
   );
 };
 
@@ -18,8 +50,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    // 상위 3개 가운데정렬
   },
 });
 
-export default Index;
+const inputStyles = StyleSheet.create({
+  container: {
+    marginBottom: 20,
+    paddingHorizontal: 20,
+  },
+  input: {
+    borderWidth: 1,
+    borderRadius: 8,
+  },
+});
+
+export default SignInScreen;

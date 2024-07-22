@@ -1,15 +1,20 @@
-// 회원가입 화면
-// Link href="/"라고 하면 첫화면으로 돌아감
 import { Link } from 'expo-router';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 const SignUpScreen = () => {
   return (
-    <View>
-      <Text>회원가입 화면</Text>
-      <Link href="/">홈화면</Link>
+    <View style={styles.container}>
+      <Text>회원가입화면</Text>
+      <Link href="/">로그인화면</Link>
     </View>
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 export default SignUpScreen;

@@ -24,3 +24,16 @@ export const Colors = {
     tabIconSelected: tintColorDark,
   },
 };
+
+export const WHITE = '#ffffff';
+export const BLACK = '#000000';
+
+export const PRIMARY = {
+  DEFUALT: '#f97316',
+  LIGHT: '#fdba74',
+  DARK: '#c2410c',
+};
+
+export const GRAY = {
+  DARK: '#6b7280',
+};
