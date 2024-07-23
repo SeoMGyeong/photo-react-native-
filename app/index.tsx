@@ -1,3 +1,5 @@
+import { getAuthErrorMessages, signIn } from '@/api/auth';
+import { useUserState } from '@/api/UserContext';
 import {
   authFormReducer,
   AuthFormTypes,
@@ -11,9 +13,11 @@ import { WHITE } from '@/constants/Colors';
 import { useFocusEffect } from '@react-navigation/native';
 import { Link } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useCallback, useEffect, useReducer, useRef, useState } from 'react';
-import { Image, Keyboard, StyleSheet, Text, View } from 'react-native';
+import { useCallback, useReducer, useRef } from 'react';
+import { Alert, Image, Keyboard, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+const [, setUser] = useUserState();
 
 const SignInScreen = () => {
   const passwordRef = useRef();
@@ -28,12 +32,25 @@ const SignInScreen = () => {
     isLoading: boolean;
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     // 버튼 누르면 키보드 없앰
     Keyboard.dismiss(); // 키보드 감춤
     if (!form.disabled && !form.isLoading) {
       dispatch({ type: AuthFormTypes.TOGGLE_LOADING });
-      console.log(form.email, form.password);
+      try {
+        const user = await signIn(form);
+        setUser(user);
+        //  console.log(user);
+      } catch (e) {
+        const message = getAuthErrorMessages(e.code);
+        Alert.alert('로그인 실패', message, [
+          {
+            text: '확인',
+            onPress: () => dispatch({ type: AuthFormTypes.TOGGLE_LOADING }),
+          },
+        ]);
+      }
+      //  console.log(form.email, form.password);
       dispatch({ type: AuthFormTypes.TOGGLE_LOADING }); //로딩 다 됐을때
     }
   };

@@ -1,3 +1,5 @@
+import { getAuthErrorMessages, signUp } from '@/api/auth';
+import { useUserState } from '@/api/UserContext';
 import {
   authFormReducer,
   AuthFormTypes,
@@ -11,7 +13,7 @@ import { WHITE } from '@/constants/Colors';
 import { Link } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useReducer, useRef } from 'react';
-import { Image, Keyboard, StyleSheet, View } from 'react-native';
+import { Alert, Image, Keyboard, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const SignUpScreen = () => {
@@ -19,6 +21,7 @@ const SignUpScreen = () => {
   const { top, bottom } = useSafeAreaInsets();
   const [form, dispatch] = useReducer(authFormReducer, initAuthForm);
   const passwordConfirmRef = useRef();
+  const [, setUser] = useUserState();
 
   type Props = {
     email: string;
@@ -41,13 +44,22 @@ const SignUpScreen = () => {
     });
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     // 버튼 누르면 키보드 없앰
     Keyboard.dismiss(); // 키보드 감춤
     if (!form.disabled && !form.isLoading) {
-      dispatch({ type: AuthFormTypes.TOGGLE_LOADING });
-      console.log(form.email, form.password); // 나중에 (tabs)의 index.tsx로 이동하는 코드 넣을거임
-      dispatch({ type: AuthFormTypes.TOGGLE_LOADING }); //로딩 다 됐을때
+      try {
+        const user = await signUp(form);
+        setUser(user);
+      } catch (e) {
+        const message = getAuthErrorMessages(e.code);
+        Alert.alert('회원가입 실패', message, [
+          {
+            text: '확인',
+            onPress: () => dispatch({ type: AuthFormTypes.TOGGLE_LOADING }),
+          },
+        ]);
+      }
     }
   };
 
