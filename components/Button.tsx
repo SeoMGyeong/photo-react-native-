@@ -4,7 +4,7 @@ import { PRIMARY, WHITE } from '@/constants/Colors';
 
 interface Props {
   title: string;
-  styles: object;
+  styles?: object;
   onPress: () => void; //함수형식
   disabled?: boolean;
   isLoading?: boolean;

@@ -17,6 +17,7 @@ import { useCallback, useReducer, useRef } from 'react';
 import { Alert, Image, Keyboard, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+// 계속 오류떠서 이거 없애보니까 됨...
 const [, setUser] = useUserState();
 
 const SignInScreen = () => {

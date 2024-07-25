@@ -5,8 +5,8 @@ import { Tabs } from 'expo-router';
 const TabLayout = () => {
   return (
     // name="/" 레이아웃 기준의... 루트? 루트경로.기본 탭 화면
-    // headerShown:false -> 헤더사라짐
-    <Tabs screenOptions={{ headerShown: false }}>
+    // headerShown:false -> 헤더사라짐 , true는 헤더 보임
+    <Tabs screenOptions={{ headerShown: true }}>
       <Tabs.Screen
         name="index" //name이름은 파일이름이랑 같아야됨
         options={{

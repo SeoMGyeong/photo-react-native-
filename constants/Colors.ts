@@ -36,4 +36,6 @@ export const PRIMARY = {
 
 export const GRAY = {
   DARK: '#6b7280',
+  LIGHT: '#cccccc',
+  DEFAULT: '#d1d5db',
 };
