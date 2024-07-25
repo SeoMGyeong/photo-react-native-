@@ -1,34 +1,39 @@
 import { signOut } from '@/api/auth';
-import { useUserState } from '@/api/UserContext';
-import Button from '@/components/Button';
+import DangerAlert, { AlertTypes } from '@/components/DangerAlert';
 import FastImage from '@/components/FastImage';
 import { GRAY, WHITE } from '@/constants/Colors';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useState } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const ProfileScreen = () => {
   //  const [user, setUser] = useUserState();
+  const [visible, setVisible] = useState(false); // 기본값 : 안보여지게
   const { top } = useSafeAreaInsets();
   const user = {
     email: 'me@email.com',
     password: 'a12345',
     photoURL:
-      'https://firebasestorage.googleapis.com/v0/b/photo-d49d0.appspot.com/o/profile.png?alt=media&token=4e8fafd8-5b8b-461d-93a9-65f709f33ac6',
+      'https://firebasestorage.googleapis.com/v0/b/photo-d49d0.appspot.com/o/profile.png?alt=media',
     displayName: 'test',
   };
 
   return (
     <View style={[styles.container, { paddingTop: top }]}>
+      <DangerAlert
+        visible={visible}
+        onClose={() => setVisible(false)}
+        alertType={AlertTypes.LOGOUT}
+        onConfirm={async () => {
+          await signOut();
+          //  setUser({});
+        }}
+      />
+
       {/* 나가기버튼 */}
       <View style={styles.settingButton}>
-        <Pressable
-          onPress={async () => {
-            await signOut();
-            // setUser({});
-          }}
-          hitSlop={10}
-        >
+        <Pressable onPress={() => setVisible(true)} hitSlop={10}>
           <MaterialCommunityIcons
             name="logout-variant"
             size={24}

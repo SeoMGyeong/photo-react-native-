@@ -1,5 +1,4 @@
 import { getAuthErrorMessages, signIn } from '@/api/auth';
-import { useUserState } from '@/api/UserContext';
 import {
   authFormReducer,
   AuthFormTypes,
@@ -18,7 +17,7 @@ import { Alert, Image, Keyboard, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // 계속 오류떠서 이거 없애보니까 됨...
-const [, setUser] = useUserState();
+// const [, setUser] = useUserState();
 
 const SignInScreen = () => {
   const passwordRef = useRef();
@@ -40,7 +39,7 @@ const SignInScreen = () => {
       dispatch({ type: AuthFormTypes.TOGGLE_LOADING });
       try {
         const user = await signIn(form);
-        setUser(user);
+        //    setUser(user);
         //  console.log(user);
       } catch (e) {
         const message = getAuthErrorMessages(e.code);
