@@ -10,7 +10,7 @@ export const ButtonTypes = {
 
 const ButtonTypeColors = {
   PRIMARY: {
-    DEFAULT: PRIMARY.DEFUALT,
+    DEFAULT: PRIMARY.DEFAULT,
     LIGHT: PRIMARY.LIGHT,
     DARK: PRIMARY.DARK,
   },
@@ -32,7 +32,7 @@ interface Props {
   onPress: () => void; //함수형식
   disabled?: boolean;
   isLoading?: boolean;
-  buttonType?: text;
+  buttonType?: string;
 }
 
 const Button = ({
@@ -61,7 +61,7 @@ const Button = ({
                 case pressed:
                   return Colors.DARK;
                 default:
-                  return Colors.DEFUALT;
+                  return Colors.DEFAULT;
               }
             })(),
           },

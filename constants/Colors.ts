@@ -29,7 +29,7 @@ export const WHITE = '#ffffff';
 export const BLACK = '#000000';
 
 export const PRIMARY = {
-  DEFUALT: '#f97316',
+  DEFAULT: '#f97316',
   LIGHT: '#fdba74',
   DARK: '#c2410c',
 };

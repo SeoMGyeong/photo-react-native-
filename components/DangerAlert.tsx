@@ -58,13 +58,13 @@ const DangerAlert = ({ visible, onClose, alertType, onConfirm }: Props) => {
               title="취소"
               onPress={onClose}
               styles={buttonStyles}
-              buttonType={ButtonTypes.DANGER}
+              buttonType={ButtonTypes.CANCEL}
             />
             <Button
               title="확인"
               onPress={onConfirm}
               styles={buttonStyles}
-              buttonType={ButtonTypes.CANCEL}
+              buttonType={ButtonTypes.DANGER}
             />
           </View>
         </View>
