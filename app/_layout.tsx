@@ -4,8 +4,13 @@ import { Stack } from 'expo-router';
 const RootLayout = () => {
   return (
     <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="index" />
+      <Stack.Screen name="SignInScreen" />
+      <Stack.Screen name="SignUpScreen" />
+      <Stack.Screen name="ImagePickerScreen" /> {/*  name은 파일명이 된다 */}
       <Stack.Screen name="(tabs)" />
       <Stack.Screen name="notfound" />
+      <Stack.Screen name="updateProfileScreen" />
     </Stack>
   );
 };
